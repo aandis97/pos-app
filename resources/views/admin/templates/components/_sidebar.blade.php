@@ -13,7 +13,7 @@
           </span>
         </a>
       </li>
-      <li class=""><a href=""><i class="fa fa-circle-o text-aqua"></i> <span>Category</span></a></li>
+      <li class="{{ route('category.index') }}"><a href=""><i class="fa fa-circle-o text-aqua"></i> <span>Category</span></a></li>
       <li class=""><a href=""><i class="fa fa-circle-o text-aqua"></i> <span>Product</span></a></li> 
     </ul>
   </section>
