@@ -11,7 +11,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::orderBy('name', 'asc')->paginate(config('olshop.pagination'));
+        $categories = Category::orderBy('name', 'asc')->paginate(10);
         return view('admin.category.index', compact('categories'));
     }
 
@@ -29,7 +29,7 @@ class CategoryController extends Controller
 
         Category::create([
             'name' => $request->name,
-            'slug' => $slug = Str::slug($request->name, '-'),
+            'slug' => Str::slug($request->name, '-'),
             'description' => $request->description
         ]);
 
@@ -45,7 +45,7 @@ class CategoryController extends Controller
     {
         $category->update([
             'name' => $request->name,
-            'slug' => $slug = Str::slug($request->name, '-'),
+            'slug' => Str::slug($request->name, '-'),
             'description' => $request->description
         ]);
 

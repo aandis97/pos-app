@@ -2,27 +2,28 @@
 
 @section('content') 
 @include('admin.templates.components._alerts')
-
   <div class="row">
     <div class="col-md-12">
       <div class="box">
         <div class="box-header with-border">
-          <h3 class="box-title">Category</h3>
+          <h3 class="box-title">Product</h3>
         </div>
 
         <div class="box-body">
-          <a href="{{ route('category.create') }}" class="btn btn-primary">Add Category</a>
+          <a href="{{ route('product.create') }}" class="btn btn-primary">Add Product</a>
           <br>
           <br>
           <table class="table table-bordered">
             <tr>
               <th>No</th>
               <th>Name</th>
+              <th>Image</th>
               <th>Slug</th>
-              <th>Description</th>
+              <!-- <th>Description</th> -->
+              <th>Category</th>
+              <th>Price</th>
               <th>Action</th>
             </tr>
-
             @php
               $page = 1;
 
@@ -32,16 +33,24 @@
 
               $no = config('olshop.pagination') * $page  - (config('olshop.pagination')-1);
             @endphp
-            @foreach($categories as $item)
-
+            @foreach($products as $item)
             <tr>
-              <td>{{ $no++ }}</td>
+              <td>{{ $no++ }} {{ $item->getImage() }}</td>
               <td>{{ $item->name }}</td>
-              <td>{{ $item->slug }}</td>
-              <td>{{ $item->description }}</td>
               <td>
-                <a href="{{ route('category.edit',$item) }}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
-                <button  class="btn btn-danger" id="delete" data-title="{{ $item->name }}" href="{{ route('category.destroy', $item) }}"><i class="fa fa-trash"></i></button>
+                <img src="{{ $item->getImage() }}" alt="" width="50px">
+              </td>
+              <td>{{ $item->slug }}</td>
+              <!-- <td>{{ $item->description }}</td> -->
+              <td>
+                @foreach($item->categories as $category)
+                  <span class="label label-primary">{{ $category->name }}</span>
+                @endforeach
+              </td>
+              <td>{{ $item->price }}</td>
+              <td>
+                <a href="{{ route('product.edit',$item) }}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                <button  class="btn btn-danger" id="delete" data-title="{{ $item->name }}" href="{{ route('product.destroy', $item) }}"><i class="fa fa-trash"></i></button>
               </td>
 
               <form action="" method="post" id="deleteForm">
@@ -53,7 +62,7 @@
           </table>
         </div>
         <div class="box-footer clearfix">
-          {{ $categories->links() }}
+          {{ $products->links() }}
         </div>
       </div>
     </div>

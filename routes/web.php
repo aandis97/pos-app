@@ -17,14 +17,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-Route::resource('category', App\Http\Controllers\Admin\CategoryController::class)->except([
-    'show',
-]);
-
-
 Route::get('/login',[App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login',[App\Http\Controllers\Auth\LoginController::class, 'login']);
 Route::post('/logout',[App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout'); 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::resource('category', App\Http\Controllers\Admin\CategoryController::class)->except([
+    'show',
+]);
+
+Route::resource('product', App\Http\Controllers\Admin\ProductController::class)->except([
+    'show',
+]);
