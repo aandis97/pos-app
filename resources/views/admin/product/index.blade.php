@@ -35,10 +35,10 @@
             @endphp
             @foreach($products as $item)
             <tr>
-              <td>{{ $no++ }} {{ $item->getImage() }}</td>
+              <td>{{ $no++ }}</td>
               <td>{{ $item->name }}</td>
               <td>
-                <img src="{{ $item->getImage() }}" alt="" width="50px">
+                <img src="{{ url('images/products/'.$item->image)  }}" alt="" width="50px">
               </td>
               <td>{{ $item->slug }}</td>
               <!-- <td>{{ $item->description }}</td> -->
